@@ -11,3 +11,7 @@ This plugin transforms `async` to `bluebird`.
 	"plugins": ["transform-async-to-bluebird"]
 }
 ```
+
+## Credits
+This babel plugin is based on
+[babel-helper-remap-async-to-generator](https://github.com/babel/babel/tree/master/packages/babel-helper-remap-async-to-generator)
