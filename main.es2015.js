@@ -125,6 +125,10 @@ export default function asyncToBluebird(pluginArg: any) {
 					AwaitExpression(path2: NodePath) {
 						// eslint-disable-next-line no-param-reassign
 						path2.node.type = 'YieldExpression';
+						path2.node.argument = t.callExpression(
+							state.addImport('bluebird', 'resolve'),
+							[path2.node.argument]
+						);
 					},
 				}, scope);
 
