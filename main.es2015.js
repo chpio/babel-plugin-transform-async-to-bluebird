@@ -38,10 +38,11 @@ export default function asyncToBluebird(pluginArg: any) {
 		const {body} = node;
 
 		node.async = false;
-		node.generator = hasAwait; // selbst hinzugefügt (richtig so?)
+		node.generator = false;
 
 		const container = t.functionExpression(null, [], t.blockStatement(body.body), true);
 		container.shadow = true;
+		container.generator = hasAwait;
 		const bbImport = state.addImport('bluebird', hasAwait ? 'coroutine' : 'method');
 		body.body = [
 			t.returnStatement(
