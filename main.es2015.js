@@ -38,7 +38,7 @@ export default function asyncToBluebird(pluginArg: any) {
 		const {body} = node;
 
 		node.async = false;
-		node.generator = hasAwait; // selbst hinzugefügt (richtig so?)
+		node.generator = false; // selbst hinzugefügt (richtig so?)
 
 		const container = t.functionExpression(null, [], t.blockStatement(body.body), true);
 		container.shadow = true;
