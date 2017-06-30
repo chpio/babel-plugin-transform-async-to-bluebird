@@ -21,7 +21,7 @@ function run(code) {
 }
 
 function runEq(desiredRes, code) {
-	return run(code).then(res => assert.equal(desiredRes, res));
+	return run(code).then(res => assert.deepEqual(desiredRes, res));
 }
 
 it('resolve non promises', () => {
