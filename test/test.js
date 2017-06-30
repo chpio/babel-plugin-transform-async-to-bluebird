@@ -31,3 +31,34 @@ it('resolve non promises', () => {
 		})();
 	`);
 });
+
+it('async methods', () => {
+	return runEq([
+		'begin',
+		'wa_begin',
+		'wa_resolve',
+		'wa_end',
+		'woa',
+		'end',
+	], `
+		class Test {
+			async with_await() {
+				let ret = ['wa_begin'];
+				ret.push(await 'wa_resolve');
+				ret.push('wa_end');
+				return ret;
+			}
+
+			async without_await() {
+				return ['woa'];
+			}
+		}
+		(async () => {
+			let ret = ['begin'];
+			ret.push(...(await new Test().with_await()));
+			ret.push(...(await new Test().without_await()));
+			ret.push('end');
+			return ret;
+		})();
+	`);
+});
