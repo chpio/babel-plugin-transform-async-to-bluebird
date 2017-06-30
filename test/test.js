@@ -17,11 +17,11 @@ function run(code) {
 			'transform-es2015-modules-commonjs'
 		],
 	});
-	return new Script(result.code, {}).runInContext(VM_CONTEXT);
+	return new Script(result.code, {}).runInContext(VM_CONTEXT).then(res => [res, result.code]);
 }
 
 function runEq(desiredRes, code) {
-	return run(code).then(res => assert.deepEqual(desiredRes, res));
+	return run(code).then(([res, resCode]) => assert.deepEqual(desiredRes, res, resCode));
 }
 
 it('resolve non promises', () => {
