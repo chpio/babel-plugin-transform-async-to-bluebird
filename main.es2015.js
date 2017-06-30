@@ -40,9 +40,8 @@ export default function asyncToBluebird(pluginArg: any) {
 		node.async = false;
 		node.generator = false;
 
-		const container = t.functionExpression(null, [], t.blockStatement(body.body), true);
+		const container = t.functionExpression(null, [], t.blockStatement(body.body), hasAwait);
 		container.shadow = true;
-		container.generator = hasAwait;
 		const bbImport = state.addImport('bluebird', hasAwait ? 'coroutine' : 'method');
 		body.body = [
 			t.returnStatement(
